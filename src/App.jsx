@@ -56,6 +56,12 @@ const App = () => {
     }
   };
 
+  const handleDomainKeyDown = (e) => {
+    if (e.key === "Enter" && newDomain) {
+      addDomain();
+    }
+  };
+
   const handlePinChange = (index, value) => {
     if (value.length <= 1 && /^[0-9]*$/.test(value)) {
       const newPin = [...pin];
@@ -107,10 +113,19 @@ const App = () => {
   };
 
   return (
-    <div className="w-[300px] min-h-[400px] p-4 bg-gradient-to-r from-gray-900 to-slate-800">
-      <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm mb-4">
-        <h2 className="text-white text-sm font-semibold mb-4">Enter PIN</h2>
-        <div className="flex gap-2 mb-4">
+    <div className="w-[350px] max-w-full min-h-[500px] p-4 bg-gradient-to-br from-slate-900 via-gray-900 to-slate-800">
+      {/* PIN Section */}
+      <div className="bg-white/5 rounded-2xl p-6 backdrop-blur-lg shadow-xl border border-white/10 mb-4">
+        <div className="text-center mb-6">
+          <div className="w-16 h-16 mx-auto mb-3 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
+            <span className="text-2xl animate-pulse">🔒</span>
+          </div>
+          <h2 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            Enter PIN
+          </h2>
+        </div>
+
+        <div className="flex gap-3 mb-6 justify-center">
           {pin.map((digit, index) => (
             <input
               key={index}
@@ -120,50 +135,74 @@ const App = () => {
               value={digit}
               onChange={(e) => handlePinChange(index, e.target.value)}
               onKeyDown={(e) => handleKeyDown(e, index)}
-              className="w-12 h-12 text-center bg-white/10 rounded border-none text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-14 h-14 text-center bg-white/10 rounded-xl border-2 border-white/5 
+                       text-white text-xl font-bold tracking-wider
+                       focus:outline-none focus:border-blue-500/50 focus:bg-white/20
+                       transition-all duration-200 shadow-lg"
               autoFocus={index === 0}
+              placeholder="•"
             />
           ))}
         </div>
-        {error && <p className="text-red-500 text-xs mb-2">{error}</p>}
         <button
           onClick={handleUnlock}
-          className="w-full bg-blue-500 text-white p-2 rounded"
+          className="w-full bg-gradient-to-r from-blue-500 to-purple-500 
+                 text-white py-3 rounded-xl font-bold
+                 hover:from-blue-600 hover:to-purple-600
+                 active:scale-95 transform transition-all duration-200
+                 shadow-lg shadow-blue-500/25"
         >
-          Unlock Site
+          Enter
         </button>
+
+        {error && (
+          <p className="text-red-400 text-xs mb-4 text-center animate-shake">
+            {error}
+          </p>
+        )}
       </div>
 
-      <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
-        <h2 className="text-white text-sm font-semibold mb-2">
-          Blocked Domains
-        </h2>
+      {/* Domains Management Section */}
+      <div className="bg-white/5 rounded-2xl p-6 backdrop-blur-lg shadow-xl border border-white/10">
+        <h3 className="text-base font-semibold text-white/90 mb-4">
+          Manage Blocked Sites
+        </h3>
+
         <div className="flex gap-2 mb-4">
           <input
             type="text"
             value={newDomain}
             onChange={(e) => setNewDomain(e.target.value)}
-            className="flex-1 p-2 bg-white/10 rounded border-none text-white text-sm"
+            onKeyDown={handleDomainKeyDown}
             placeholder="Enter domain..."
+            className="flex-1 px-4 py-2 bg-white/10 rounded-xl text-sm text-white
+                   border-2 border-white/5 focus:border-blue-500/50
+                   focus:outline-none focus:bg-white/20 transition-all"
           />
           <button
             onClick={addDomain}
-            className="bg-green-500 text-white px-3 rounded"
+            className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-500
+                   text-white rounded-xl font-medium text-sm
+                   hover:from-green-600 hover:to-emerald-600
+                   active:scale-95 transition-all duration-200"
           >
             Add
           </button>
         </div>
 
-        <div className="max-h-[150px] overflow-y-auto">
+        <div className="max-h-[200px] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
           {blockedDomains.map((domain, index) => (
             <div
               key={index}
-              className="flex justify-between items-center bg-white/5 rounded p-2 mb-2"
+              className="flex items-center justify-between p-3 mb-2
+                       bg-white/5 rounded-xl group hover:bg-white/10
+                       transition-all duration-200"
             >
-              <span className="text-white text-sm">{domain}</span>
+              <span className="text-sm text-white/90">{domain}</span>
               <button
                 onClick={() => removeDomain(domain)}
-                className="text-red-500 text-xs"
+                className="opacity-0 group-hover:opacity-100 text-red-400
+                         hover:text-red-300 transition-all duration-200"
               >
                 Remove
               </button>

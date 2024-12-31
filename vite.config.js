@@ -1,15 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
       input: {
-        popup: 'index.html', // Entry point for popup
+        main: path.resolve(__dirname, 'index.html'),
+        blocked: path.resolve(__dirname, 'blocked.html')
       },
     },
-    outDir: 'dist', // Output folder
+    outDir: 'dist',
   },
-  publicDir: 'public', // Ensure public files like manifest.json and icon are copied
+  publicDir: 'public',
 });

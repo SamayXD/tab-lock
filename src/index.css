@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  width: 300px;
+/* body {
+  width: 350px;
   height: 200px;
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
+} */
 
 #root {
   width: 100%;
