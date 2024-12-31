@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Hello World Extension",
+  "version": "1.0",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.jpeg"
+  },
+  "permissions": [],
+  "description": "A simple Chrome extension built with React to display 'Hello, World!'.",
+  "background": { "scripts": ["hot-reload.js"] }
+}
