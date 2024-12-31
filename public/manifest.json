@@ -1,21 +1,22 @@
 {
   "manifest_version": 3,
-  "name": "Hello World Extension",
+  "name": "Tab Lock Extension",
   "version": "1.0",
-  "action": {
-    "default_popup": "index.html",
-    "default_icon": "icon.jpeg"
-  },
- "permissions": [
+  "permissions": [
     "activeTab",
     "tabs",
     "storage",
     "scripting",
-    "notifications"
-  ], "host_permissions": [
-    "*://*.pixels.com/*"
+    "notifications",
+    "webNavigation"
   ],
-  "description": "A simple Chrome extension built with React to display 'Hello, World!'.",
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "icon.jpeg"
+  },
   "background": {
     "service_worker": "background.js"
   }
