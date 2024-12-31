@@ -6,8 +6,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         
         chrome.storage.local.get(['blockedDomains', 'isUnlocked'], (result) => {
           const blockedDomains = result.blockedDomains || [];
-          
-          // Check if any blocked domain matches the current hostname
           const isBlocked = blockedDomains.some(domain => 
             hostname === domain || 
             hostname.endsWith(`.${domain}`)
@@ -18,8 +16,12 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
               originalUrl: changeInfo.url,
               currentBlockedDomain: hostname
             }, () => {
+              // Prevent navigation and show popup
               chrome.tabs.update(tabId, { 
-                url: chrome.runtime.getURL('blocked.html') 
+                url: 'chrome://newtab' 
+              }, () => {
+                // Force open the extension popup
+                chrome.action.openPopup();
               });
             });
           }
