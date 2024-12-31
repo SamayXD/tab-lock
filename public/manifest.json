@@ -10,7 +10,8 @@
     "activeTab",
     "tabs",
     "storage",
-    "scripting"
+    "scripting",
+    "notifications"
   ], "host_permissions": [
     "*://*.pixels.com/*"
   ],

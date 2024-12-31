@@ -34,7 +34,7 @@ const App = () => {
   };
 
   return (
-    <div className="w-[300px] min-h-[100px] p-4 bg-gradient-to-r from-gray-900 to-slate-800">
+    <div className="w-[300px] min-h-[50px] p-4 bg-gradient-to-r from-gray-900 to-slate-800">
       <div className="bg-white/10 rounded-lg p-4 backdrop-blur-sm">
         <h2 className="text-white text-sm font-semibold mb-2">Enter PIN</h2>
         <input
