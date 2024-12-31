@@ -29,12 +29,40 @@ const App = () => {
     }
   }, []);
 
+  const handleKeyDown = (e, index) => {
+    switch (e.key) {
+      case "Backspace":
+        // Move to previous input if current is empty
+        if (!pin[index] && index > 0) {
+          const newPin = [...pin];
+          newPin[index - 1] = "";
+          setPin(newPin);
+          document.getElementById(`pin-${index - 1}`).focus();
+        }
+        break;
+      case "ArrowLeft":
+        if (index > 0) {
+          document.getElementById(`pin-${index - 1}`).focus();
+        }
+        break;
+      case "ArrowRight":
+        if (index < 3) {
+          document.getElementById(`pin-${index + 1}`).focus();
+        }
+        break;
+      case "Enter":
+        handleUnlock();
+        break;
+    }
+  };
+
   const handlePinChange = (index, value) => {
     if (value.length <= 1 && /^[0-9]*$/.test(value)) {
       const newPin = [...pin];
       newPin[index] = value;
       setPin(newPin);
 
+      // Auto-advance to next input
       if (value && index < 3) {
         document.getElementById(`pin-${index + 1}`).focus();
       }
@@ -91,7 +119,8 @@ const App = () => {
               maxLength="1"
               value={digit}
               onChange={(e) => handlePinChange(index, e.target.value)}
-              className="w-12 h-12 text-center bg-white/10 rounded border-none text-white"
+              onKeyDown={(e) => handleKeyDown(e, index)}
+              className="w-12 h-12 text-center bg-white/10 rounded border-none text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               autoFocus={index === 0}
             />
           ))}
