@@ -1,42 +1,129 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 300px;
+  height: 400px;
+}
+
+.app-container {
+  width: 300px;
+  min-height: 400px;
+  padding: 20px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+  color: white;
+  font-family: 'Segoe UI', system-ui, -apple-system;
+}
+
+.site-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.site-icon {
+  font-size: 24px;
+  color: #3498db;
+}
+
+.site-info h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.url {
+  margin: 5px 0 0;
+  font-size: 12px;
+  opacity: 0.7;
+  word-break: break-all;
+}
+
+.pin-container {
+  margin: 20px 0;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.pin-container label {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 14px;
+  color: #ecf0f1;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.pin-inputs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 15px 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.pin-inputs input {
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  font-size: 20px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.2s ease;
 }
 
-.card {
-  padding: 2em;
+.pin-inputs input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 0 2px #3498db;
 }
 
-.read-the-docs {
-  color: #888;
+.error {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 10px;
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.lock-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(45deg, #3498db, #2ecc71);
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 20px;
+}
+
+.lock-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lock-button:active {
+  transform: translateY(0);
 }
