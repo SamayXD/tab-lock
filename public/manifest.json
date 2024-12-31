@@ -6,10 +6,16 @@
     "default_popup": "index.html",
     "default_icon": "icon.jpeg"
   },
-  "permissions": [
+ "permissions": [
     "activeTab",
-    "tabs"
+    "tabs",
+    "storage",
+    "scripting"
+  ], "host_permissions": [
+    "*://*.pixels.com/*"
   ],
   "description": "A simple Chrome extension built with React to display 'Hello, World!'.",
-  "background": { "scripts": ["hot-reload.js"] }
+  "background": {
+    "service_worker": "background.js"
+  }
 }
